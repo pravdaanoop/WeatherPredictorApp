@@ -17,7 +17,7 @@ Prediction of climate(Rainy/Sunny/Snowy) - Logistic regression methodology (Logi
 ## Prerequisite
 JavaSE 1.8
 Apache Maven 3.3.3
-Eclipse
+Eclipse neon
 
 ## Getting Started
 To run the application, 
