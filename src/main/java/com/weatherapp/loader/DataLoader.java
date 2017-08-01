@@ -3,10 +3,13 @@ package main.java.com.weatherapp.loader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 
+import main.java.com.weatherapp.dto.ClimateDTO;
 import main.java.com.weatherapp.dto.RegressionDataDTO;
 import main.java.com.weatherapp.exception.WeatherAppException;
 import main.java.com.weatherapp.util.Constants;
@@ -97,4 +100,47 @@ public class DataLoader {
 		return dataLoad;
 	}
 
+	/**
+	 * Method loads input data for the climate prediction
+	 * @return
+	 * @throws WeatherAppException 
+	 */
+	public static List<ClimateDTO> loadClimateData() throws WeatherAppException {
+		List<ClimateDTO> result = new ArrayList<ClimateDTO>();
+		BufferedReader br = null;
+		String line = "";
+		try {
+			br = new BufferedReader(new FileReader(inputCSVFile));
+			while ((line = br.readLine()) != null) {
+				// record: <temp><,><pressure><,><hum><,><lat><,><long><,><ele><,><timestamp><,><climatecondition>
+                StringTokenizer tokenizer = new StringTokenizer(line,Constants.DELIMITTER_COMA);
+                String[] features = null;
+                while(tokenizer.hasMoreTokens()){
+					tokenizer.nextToken();//skipping temp
+					tokenizer.nextToken();//skipping pressure
+					tokenizer.nextToken();//skipping hum
+					int tokenScore = tokenizer.countTokens();
+					features = new String[tokenScore];
+					for (int i = 0; i < features.length; i++) {
+						features[i]= tokenizer.nextToken();
+				}
+				}
+				result.add(new ClimateDTO(features));
+			}
+		} catch (IOException e) {
+			logger.error(e);
+			throw new WeatherAppException(e.getMessage());
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					logger.error(e);
+					throw new WeatherAppException(e.getMessage());
+				}
+			}
+		}
+		logger.info("climate regression load completed");
+		return result;
+	}
 }
