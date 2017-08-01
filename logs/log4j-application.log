@@ -1,0 +1,6 @@
+2017-08-01 22:49:18 INFO  DataLoader:99 - weather regression load completed
+2017-08-01 22:49:18 INFO  DataLoader:143 - climate regression load completed
+2017-08-01 22:49:18 INFO  PredictWeatherMain:108 - writing output file
+2017-08-01 22:49:48 INFO  DataLoader:99 - weather regression load completed
+2017-08-01 22:49:48 INFO  DataLoader:143 - climate regression load completed
+2017-08-01 22:49:48 INFO  PredictWeatherMain:108 - writing output file
