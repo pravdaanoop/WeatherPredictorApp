@@ -1,5 +1,5 @@
 
-## WeatherApp
+## WeatherPredictorApp
 Machine Learning model for weather prediction using Java
 
 ## Requirement
