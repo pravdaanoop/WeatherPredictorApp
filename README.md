@@ -30,11 +30,9 @@ Eclipse Neon
 To run the application, 
 
 1.Build the maven project:
-
 mvn clean install 
 
 2.Run command:
-
 java -jar <jarname> <latitude> <longitude> <elevation> <timestamp> <outputfileLocation>
 
 
