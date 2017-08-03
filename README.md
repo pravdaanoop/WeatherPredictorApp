@@ -25,10 +25,15 @@ Logistic regression from Apache Mahout 0.9 API is used.**(org.apache.mahout.clas
 
 ```
 
-**Entry class** 					- /src/main/java/com/weatherapp/application/PredictWeatherMain.java
-**Load Data to Regression models**  - /src/main/java/com/weatherapp/loader/DataLoader.java
-**Regression classes** 				- /src/main/java/com/weatherapp/regression/LinearRegression.java 
-				  					- /src/main/java/com/weatherapp/regression/LogisticRegression.java
+Entry class
+/src/main/java/com/weatherapp/application/PredictWeatherMain.java
+
+Load Data to Regression models
+/src/main/java/com/weatherapp/loader/DataLoader.java
+
+Regression classes
+/src/main/java/com/weatherapp/regression/LinearRegression.java 
+/src/main/java/com/weatherapp/regression/LogisticRegression.java
 
 ```
 
