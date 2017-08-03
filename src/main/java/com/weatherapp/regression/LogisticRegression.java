@@ -18,7 +18,7 @@ import main.java.com.weatherapp.util.PropertyLoader;
 /**
  * Class for performing logistic regression to predict climatic conditions
  * 
- * Date 23 July 2017
+ * Date 01 Aug 2017
  * 
  * @author Pravda Rajeev
  * @version v0.1
