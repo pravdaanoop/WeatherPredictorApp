@@ -57,7 +57,7 @@ public class LinearRegression {
 	 * @return
 	 * @throws WeatherAppException
 	 */
-	static double predict(OLSMultipleLinearRegression regression, double[] inputFeatures) throws WeatherAppException {
+	public static double predict(OLSMultipleLinearRegression regression, double[] inputFeatures) throws WeatherAppException {
 		double prediction = 0.0;
 		try {
 			double[] beta = regression.estimateRegressionParameters();
