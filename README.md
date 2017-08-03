@@ -21,6 +21,17 @@ The weather condition can be either of Rain,Snow or Sunny, predicting which is a
 Logistic regression from Apache Mahout 0.9 API is used.**(org.apache.mahout.classifier.sgd.OnlineLogisticRegression)**
 
 
+## Major Classes
+
+```
+
+**Entry class** 					- /src/main/java/com/weatherapp/application/PredictWeatherMain.java
+**Load Data to Regression models**  - /src/main/java/com/weatherapp/loader/DataLoader.java
+**Regression classes** 				- /src/main/java/com/weatherapp/regression/LinearRegression.java 
+				  					- /src/main/java/com/weatherapp/regression/LogisticRegression.java
+
+```
+
 ## Prerequisites
 
 ```
@@ -50,4 +61,9 @@ java -jar <jarname> <latitude> <longitude> <elevation> <timestamp> <outputfileLo
 
 ```
 
+## Sample Output
 
+```
+NA|34.5555,-78.5677,91.789|2017-07-22T22:02:36Z|Rain|0.6830825211998673|1010.8259764807575|77.65784628569662
+
+```
