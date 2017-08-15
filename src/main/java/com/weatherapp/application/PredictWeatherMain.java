@@ -72,10 +72,15 @@ public class PredictWeatherMain {
 	public static void main(String[] args) {
 		try {
 			// TODO Auto-generated method stub
-			// arg[0] = lat||arg[1] = long||arg[2] = ele||arg[3] = time||arg[4]
-			// = output file location
+			// args[0]=latitude|args[1]=longitude|args[2]=elevation|args[3]=timestamp|args[4]=output
+			// file location
+
+			// training_data loaded for weather prediction
 			geoData = DataLoader.loadData();
+
+			// training_data loaded for climate prediction
 			climateData = DataLoader.loadClimateData();
+
 			WeatherDTO weather = new WeatherDTO();
 			weather.setLatitude(Double.parseDouble(args[0]));
 			weather.setLongitude(Double.parseDouble(args[1]));
@@ -90,7 +95,7 @@ public class PredictWeatherMain {
 				inputParameters[i] = Double.parseDouble(args[i]);
 			}
 			weather = LinearRegression.trainData(geoData, inputParameters, weather);
-		
+
 			// dealing climatecondition
 			OnlineLogisticRegression olr = LogisticRegression.trainData(climateData);
 			Climate climateCondition = LogisticRegression.predict(olr, inputParameters);

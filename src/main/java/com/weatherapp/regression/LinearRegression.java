@@ -21,17 +21,20 @@ public class LinearRegression {
 	 * Logger
 	 */
 	final static Logger logger = Logger.getLogger(LinearRegression.class);
-	
+
 	/**
-	 * Method to input the train data set to the regression
+	 * Method to train the regression object with the training_data and predict
+	 * temp/pressure/humidity and set to the output dto
+	 * 
 	 * @param trainData
 	 * @return
-	 * @throws WeatherAppException 
+	 * @throws WeatherAppException
 	 */
-	public static WeatherDTO trainData(RegressionDataDTO geoData,double[] inputParameters,WeatherDTO weather) throws WeatherAppException {
+	public static WeatherDTO trainData(RegressionDataDTO geoData, double[] inputParameters, WeatherDTO weather)
+			throws WeatherAppException {
 		try {
 			OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
-			
+
 			regression.newSampleData(geoData.getHumidityData(), geoData.getFeatures());
 			double humidityPredicted = predict(regression, inputParameters);
 			regression.newSampleData(geoData.getPressureData(), geoData.getFeatures());
@@ -48,16 +51,17 @@ public class LinearRegression {
 			throw new WeatherAppException(e.getMessage());
 		}
 	}
- 
+
 	/**
-	 * Method to predict the output from the linear regression model
+	 * Method to predict the output(temp/pressure/humidity) from the trained linear regression model
 	 * 
 	 * @param regression
 	 * @param inputFeatures
 	 * @return
 	 * @throws WeatherAppException
 	 */
-	public static double predict(OLSMultipleLinearRegression regression, double[] inputFeatures) throws WeatherAppException {
+	public static double predict(OLSMultipleLinearRegression regression, double[] inputFeatures)
+			throws WeatherAppException {
 		double prediction = 0.0;
 		try {
 			double[] beta = regression.estimateRegressionParameters();
@@ -75,5 +79,5 @@ public class LinearRegression {
 		}
 		return prediction;
 	}
-	
+
 }

@@ -28,21 +28,23 @@ public class LogisticRegression {
 	 * Logger
 	 */
 	final static Logger logger = Logger.getLogger(LogisticRegression.class);
-	
 
 	/**
-	 * Method to input the train data set to the regression
+	 * Method to train the regression object with the training_data and returns
+	 * the regression object so that further prediction of climate condition can
+	 * be carried out with the regression object
+	 * 
 	 * @param trainData
 	 * @return
-	 * @throws WeatherAppException 
+	 * @throws WeatherAppException
 	 */
 	public static OnlineLogisticRegression trainData(List<ClimateDTO> trainData) throws WeatherAppException {
 		try {
 			int numCategory = Integer.parseInt(PropertyLoader.OUTPUT_CATEGORY_SIZE);
 			int numFeatures = Integer.parseInt(PropertyLoader.INPUT_FEATURE_SIZE);
 			OnlineLogisticRegression olr = new OnlineLogisticRegression(numCategory, numFeatures, new L1());
-				for (ClimateDTO observation : trainData) {
-					olr.train(observation.getActual(), observation.getVector());
+			for (ClimateDTO observation : trainData) {
+				olr.train(observation.getActual(), observation.getVector());
 			}
 			return olr;
 		} catch (NumberFormatException e) {
@@ -51,31 +53,33 @@ public class LogisticRegression {
 			throw new WeatherAppException(e.getMessage());
 		}
 	}
- 
+
 	/**
-	 * Method to predict the climate from regression
+	 * Method to predict the climate condition for the input params provided
+	 * using the trained regression instance
+	 * 
 	 * @param olr
 	 * @param inputParam
 	 * @return
-	 * @throws WeatherAppException 
+	 * @throws WeatherAppException
 	 */
-	public static Climate predict(OnlineLogisticRegression olr,double[]inputParam) throws WeatherAppException {
-		
+	public static Climate predict(OnlineLogisticRegression olr, double[] inputParam) throws WeatherAppException {
+
 		try {
 			String[] input = new String[inputParam.length];
 			for (int i = 0; i < input.length; i++)
 				input[i] = String.valueOf(inputParam[i]);
 			ClimateDTO newObservation = new ClimateDTO(input);
 			Vector result = olr.classifyFull(newObservation.getVector());
-			if(result.size() == Climate.values().length){
+			if (result.size() == Climate.values().length) {
 				double rainProb = result.get(0);
 				double snowProb = result.get(1);
 				double sunnyProb = result.get(2);
-				if((rainProb >=snowProb )&&(rainProb >=sunnyProb )){
+				if ((rainProb >= snowProb) && (rainProb >= sunnyProb)) {
 					return Climate.Rain;
-				}else if ((snowProb >=rainProb )&&(snowProb >=sunnyProb )){
+				} else if ((snowProb >= rainProb) && (snowProb >= sunnyProb)) {
 					return Climate.Snow;
-				}else if ((sunnyProb >=rainProb )&&(sunnyProb >=snowProb )){
+				} else if ((sunnyProb >= rainProb) && (sunnyProb >= snowProb)) {
 					return Climate.Sunny;
 				}
 			}
